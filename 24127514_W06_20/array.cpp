@@ -163,11 +163,11 @@ void P423(int A[][MAXLEN], int nRow, int nCol){
         right--;
         
         if (top <= bot){
-            for (int i = right - 1; i >= left; i--) A[bot][i] = arr1D[idx++];
+            for (int i = right; i >= left; i--) A[bot][i] = arr1D[idx++];
             bot--;
         }
         if (left <= right){
-            for (int j = bot - 1; j >= top; j++) A[j][left] = arr1D[idx++];
+            for (int j = bot; j >= top; j++) A[j][left] = arr1D[idx++];
         }
     }
 }
