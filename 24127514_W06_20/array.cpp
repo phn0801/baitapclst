@@ -98,7 +98,7 @@ float P02(int A[], int n){
 //P04
 void P04(int A[], int n){
     int count = 0;
-    int arrPrime[n];
+    int arrPrime[MAXLEN];
 
     for(int i = 0; i < n; i++){
         if(isPrime(A[i]))
@@ -399,11 +399,12 @@ bool P458(int A[MAXLEN][MAXLEN], int n){
 }
 
 //P471
-void P471(int A[MAXLEN][MAXLEN], int n, int res[][MAXLEN]){
+void P471(int A[MAXLEN][MAXLEN], iny B[MAXLEN][MAXLEN], int n, int res[][MAXLEN]){
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
+            res[i][j] = 0;
             for(int k = 0; k < n; k++){
-                res[i][j] += A[i][k] * A[k][i];
+                res[i][j] += A[i][k] * B[k][j];
             }
         }
     }
