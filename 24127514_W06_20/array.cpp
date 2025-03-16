@@ -7,6 +7,15 @@ void create1DArray(int A[], int &n){
     }
 }
 void create2DArray(int A[][MAXLEN], int &nRow, int &nCol){
+    cin >> nRow >> nCol;
+    for (int i = 0; i < nRow; i++){
+        for (int j = 0; j < nCol; j++){
+            cin >> A[i][j];
+        }
+    }
+}
+void create2DArrayFloat(double A[][MAXLEN], int &nRow, int &nCol){
+    cin >> nRow >> nCol;
     for (int i = 0; i < nRow; i++){
         for (int j = 0; j < nCol; j++){
             cin >> A[i][j];
@@ -60,25 +69,43 @@ void print2DArray(int A[][MAXLEN], int nRow, int nCol){
         cout << endl;
     }
 }
-
+void inputP25_26(int A[], int B[], int C[], int &nA, int &nB, int &nC){
+    cin >> nA >> nB;
+    nC = nA + nB;
+    for (int i = 0; i < nA; i++)
+        cin >> A[i];
+    for (int i = 0; i < nB; i++)
+        cin >> B[i];
+}
 // P01
 void P01(int A[], int n){
     if (n < 0){
         cout << "0 0";
         return;
     }
-    int evenMax = A[0];
-    int oddMax = A[0];
+    int evenMax;
+    int oddMin;
+    bool isFindEvenMax = false, isFindOddMin = false;
     
     for(int i = 0; i < n; i++){
         if(A[i] % 2 == 0){
+            if (isFindEvenMax == false){
+                evenMax = A[i];
+                isFindEvenMax = true;
+            }
+
             if(A[i] > evenMax) evenMax = A[i];
         }
         else{
-            if(A[i] > oddMax) oddMax = A[i];
+            if (isFindOddMin == false){
+                oddMin = A[i];
+                isFindOddMin = true;
+            }
+
+            if(A[i] < oddMin) oddMin = A[i];
         }
     }
-    cout << evenMax <<" " << oddMax << endl;
+    cout << evenMax <<" " << oddMin << endl;
 }
 
 // P02
@@ -223,7 +250,7 @@ void P26(int A[], int B[], int n, int m){
 }
 
 //P320
-int P320(int A[MAXLEN][MAXLEN], int nRow, int nCol){
+int P320(double A[][MAXLEN], int nRow, int nCol){
     int sum = 0;
 
     for(int i = 0; i < nRow; i ++){
@@ -236,7 +263,7 @@ int P320(int A[MAXLEN][MAXLEN], int nRow, int nCol){
     
     return sum;
 }
-int P342(int A[][MAXLEN], int nRow, int nCol){
+int P342(double A[][MAXLEN], int nRow, int nCol){
     int count = 0;
     int idxRowAround[9] = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
     int idxColAround[9] = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
@@ -268,7 +295,7 @@ int P342(int A[][MAXLEN], int nRow, int nCol){
 }
 
 //P347
-int P347(int A[MAXLEN][MAXLEN], int nRow, int nCol){
+int P347(int A[][MAXLEN], int nRow, int nCol){
     int saddle = 0;
     bool isValid = true;
     for (int i = 0; i < nRow; i++){
@@ -322,7 +349,7 @@ void P398(int A[][MAXLEN], int &nRow, int &nCol){
 }
 
 // P402 xoay theo chieu kim dong ho
-void P402(int A[MAXLEN][MAXLEN], int &nRow, int &nCol){
+void P402(int A[][MAXLEN], int &nRow, int &nCol){
     P398(A, nRow, nCol);
 }
 
@@ -366,7 +393,7 @@ void P423(int A[][MAXLEN], int nRow, int nCol){
 }
 
 //P438
-int P438(int A[MAXLEN][MAXLEN], int n){
+int P438(int A[][MAXLEN], int n){
     int sum = 0;
     for(int i = 0; i < n; i ++){
         for(int j = 0; j < n; j++){
@@ -378,7 +405,7 @@ int P438(int A[MAXLEN][MAXLEN], int n){
 }
 
 //P457
-bool P457(int A[MAXLEN][MAXLEN], int n){
+bool P457(int A[][MAXLEN], int n){
     for(int i = 0; i < n; i ++){
         for(int j = 0; j < n; j ++){
             if(A[i][j] != A[j][i]) return false;
@@ -388,7 +415,7 @@ bool P457(int A[MAXLEN][MAXLEN], int n){
 }
 
 
-bool P458(int A[MAXLEN][MAXLEN], int n){
+bool P458(int A[][MAXLEN], int n){
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             if(A[i][j] != A[n-1-j][n-1-i])
@@ -399,7 +426,7 @@ bool P458(int A[MAXLEN][MAXLEN], int n){
 }
 
 //P471
-void P471(int A[MAXLEN][MAXLEN], int B[MAXLEN][MAXLEN], int n, int res[][MAXLEN]){
+void P471(int A[][MAXLEN], int B[][MAXLEN], int n, int res[][MAXLEN]){
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             res[i][j] = 0;
